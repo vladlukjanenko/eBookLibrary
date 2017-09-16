@@ -1,6 +1,11 @@
 package com.book.library.rest;
 
 import com.book.library.services.Book;
+import com.book.library.services.BookService;
+import com.book.library.services.BookServiceException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,13 +25,32 @@ import java.util.List;
 public class BookController {
 
     /**
+     * {@link Logger} instance.
+     * */
+    private static Logger LOGGER = LoggerFactory.getLogger("RestLogger");
+
+
+    /**
+     * {@link BookService} instance.
+     * */
+    @Autowired
+    private BookService bookService;
+
+
+    /**
      * Returns all available books.
      *
      * @return  list of <>BOOKS</>
      * */
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     public List<Book> getBooks() {
-        return Collections.emptyList();
+
+        try {
+            return bookService.getBooks();
+        } catch (BookServiceException e) {
+            LOGGER.error("Unable to get list of books. Returning empty collection", e);
+            return Collections.EMPTY_LIST;
+        }
     }
 
     /**
@@ -37,7 +61,13 @@ public class BookController {
      * */
     @RequestMapping(value = "/book/{bookId}", method = RequestMethod.GET)
     public Book getBook(@PathVariable long bookId) {
-        return null;
+
+        try {
+            return bookService.getBook(bookId);
+        } catch (BookServiceException e) {
+            LOGGER.error("Unable to get book by id=" + bookId, e);
+            return null;
+        }
     }
 
     /**
@@ -48,7 +78,14 @@ public class BookController {
      * */
     @RequestMapping(value = "/book", method = RequestMethod.POST)
     public String createBook(@RequestBody Book book) {
-        return "";
+
+        try {
+            bookService.saveBook(book);
+        } catch (BookServiceException e) {
+            LOGGER.error("Error occurred while saving object", e);
+        }
+
+        return "{}";
     }
 
     /**
@@ -70,6 +107,13 @@ public class BookController {
      * */
     @RequestMapping(value = "/book/{bookId}", method = RequestMethod.DELETE)
     public String deleteBook(@PathVariable long bookId) {
-        return "";
+
+        try {
+            bookService.deleteBook(bookId);
+        } catch (BookServiceException e) {
+            LOGGER.error("Error occurred while removing object, id=" + bookId, e);
+        }
+
+        return "{}";
     }
 }
