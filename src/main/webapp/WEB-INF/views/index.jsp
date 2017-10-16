@@ -1,7 +1,10 @@
-<%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
-<html>
-    <head></head>
+<html >
+    <head>
+        <title>Book Library</title>
+
+        <script type="text/javascript" src="/static/angular-1.6.6/angular.js"/>
+    </head>
     <body>
-        <h2>Hello World!</h2>
+
     </body>
 </html>
