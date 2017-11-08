@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Vlad Lukjanenko.
  */
 @Controller
-public class MainController {
+public class IndexController {
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public ModelAndView getIndexPage() {

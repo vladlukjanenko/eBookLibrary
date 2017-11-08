@@ -6,6 +6,8 @@ import com.book.library.services.BookServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,13 +45,13 @@ public class BookController {
      * @return  list of <>BOOKS</>
      * */
     @RequestMapping(value = "/books", method = RequestMethod.GET)
-    public List<Book> getBooks() {
+    public ResponseEntity<List<Book>> getBooks() {
 
         try {
-            return bookService.getBooks();
+            return new ResponseEntity<>(bookService.getBooks(), HttpStatus.OK);
         } catch (BookServiceException e) {
             LOGGER.error("Unable to get list of books. Returning empty collection", e);
-            return Collections.EMPTY_LIST;
+            return new ResponseEntity<>(Collections.EMPTY_LIST, HttpStatus.OK);
         }
     }
 
@@ -60,13 +62,13 @@ public class BookController {
      * @return  list of <>BOOKS</>
      * */
     @RequestMapping(value = "/book/{bookId}", method = RequestMethod.GET)
-    public Book getBook(@PathVariable long bookId) {
+    public ResponseEntity<Book> getBook(@PathVariable long bookId) {
 
         try {
-            return bookService.getBook(bookId);
+            return new ResponseEntity<>(bookService.getBook(bookId), HttpStatus.OK);
         } catch (BookServiceException e) {
             LOGGER.error("Unable to get book by id=" + bookId, e);
-            return null;
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -77,15 +79,16 @@ public class BookController {
      * @return  list of <>BOOKS</>
      * */
     @RequestMapping(value = "/book", method = RequestMethod.POST)
-    public String createBook(@RequestBody Book book) {
+    public ResponseEntity<Void> createBook(@RequestBody Book book) {
 
         try {
             bookService.saveBook(book);
         } catch (BookServiceException e) {
             LOGGER.error("Error occurred while saving object", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        return "{}";
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     /**
@@ -95,8 +98,8 @@ public class BookController {
      * @return  list of <>BOOKS</>
      * */
     @RequestMapping(value = "/book", method = RequestMethod.PUT)
-    public String updateBook(@RequestBody Book book) {
-        return "";
+    public ResponseEntity<Book> updateBook(@RequestBody Book book) {
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /**
@@ -106,14 +109,15 @@ public class BookController {
      * @return  list of <>BOOKS</>
      * */
     @RequestMapping(value = "/book/{bookId}", method = RequestMethod.DELETE)
-    public String deleteBook(@PathVariable long bookId) {
+    public ResponseEntity<Book> deleteBook(@PathVariable long bookId) {
 
         try {
             bookService.deleteBook(bookId);
         } catch (BookServiceException e) {
             LOGGER.error("Error occurred while removing object, id=" + bookId, e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        return "{}";
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
