@@ -1,6 +1,7 @@
 package com.book.library.services.book;
 
 import com.book.library.model.Book;
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public interface BookService {
      * @return  {@link Book} instance or null if entity not found.
      * @throws  BookServiceException    if error occurs.
      * */
-    Book getBook(long id) throws BookServiceException;
+    Book getBook(ObjectId id) throws BookServiceException;
 
     /**
      * Returns all books.
@@ -46,5 +47,5 @@ public interface BookService {
      * @param id    book id.
      * @throws  BookServiceException    if error occurs.
      * */
-    void deleteBook(long id) throws BookServiceException;
+    void deleteBook(ObjectId id) throws BookServiceException;
 }

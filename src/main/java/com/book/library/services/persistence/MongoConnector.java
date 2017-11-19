@@ -3,12 +3,14 @@ package com.book.library.services.persistence;
 import com.mongodb.MongoClient;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
+import org.springframework.stereotype.Component;
 
 /**
  * Mongo connector for performing all operation with mongo DB.
  *
  * @author Vlad Lukjanenko.
  */
+@Component("mongoConnector")
 public final class MongoConnector {
 
     /**
@@ -40,7 +42,7 @@ public final class MongoConnector {
         mongo = new MongoClient("127.0.0.1", 27017);
         morphia = new Morphia();
 
-        morphia.mapPackage("com.book.library.services");
+        morphia.mapPackage("com.book.library.model");
         datastore = morphia.createDatastore(mongo, "library");
         datastore.ensureIndexes();
     }

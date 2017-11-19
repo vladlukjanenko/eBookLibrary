@@ -30,9 +30,10 @@ public class BookServiceImpl implements BookService {
         datastore = MongoConnector.getDatabase();
     }
 
+
     @Override
-    public Book getBook(long id) throws BookServiceException {
-        return datastore.createQuery(Book.class).field("_id").equal(new ObjectId()).get();
+    public Book getBook(ObjectId id) throws BookServiceException {
+        return datastore.createQuery(Book.class).field("_id").equal(id).get();
     }
 
     @Override
@@ -51,12 +52,12 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void deleteBook(long id) throws BookServiceException {
+    public void deleteBook(ObjectId id) throws BookServiceException {
 
-        Book book = datastore.createQuery(Book.class).field("_id").equal(new ObjectId()).get();
+        Book book = datastore.createQuery(Book.class).field("_id").equal(id).get();
 
         if (book == null) {
-            return;
+            throw new BookServiceException("Book by id=" + id + " not found.");
         }
 
         datastore.delete(book).isUpdateOfExisting();
