@@ -27,7 +27,7 @@ public final class MongoConnector {
     private Morphia morphia;
 
     /**
-     * {@link Datastore} instance.
+     * {@link Datastore} instance for book service.
      * */
     private Datastore datastore;
 
@@ -39,6 +39,7 @@ public final class MongoConnector {
 
         mongo = new MongoClient("127.0.0.1", 27017);
         morphia = new Morphia();
+
         morphia.mapPackage("com.book.library.services");
         datastore = morphia.createDatastore(mongo, "library");
         datastore.ensureIndexes();

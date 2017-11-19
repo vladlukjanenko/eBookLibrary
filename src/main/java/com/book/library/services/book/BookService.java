@@ -1,5 +1,6 @@
-package com.book.library.services;
+package com.book.library.services.book;
 
+import com.book.library.model.Book;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 

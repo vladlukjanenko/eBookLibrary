@@ -1,4 +1,4 @@
-package com.book.library.services;
+package com.book.library.services.book;
 
 /**
  * General exception class for catching all errors from {@link BookService}.

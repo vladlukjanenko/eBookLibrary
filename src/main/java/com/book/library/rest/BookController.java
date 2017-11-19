@@ -1,8 +1,8 @@
 package com.book.library.rest;
 
-import com.book.library.services.Book;
-import com.book.library.services.BookService;
-import com.book.library.services.BookServiceException;
+import com.book.library.model.Book;
+import com.book.library.services.book.BookService;
+import com.book.library.services.book.BookServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,5 +1,6 @@
-package com.book.library.services;
+package com.book.library.services.book;
 
+import com.book.library.model.Book;
 import com.book.library.services.persistence.MongoConnector;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
