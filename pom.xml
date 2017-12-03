@@ -21,6 +21,12 @@
 
     <morphia.version>1.3.2</morphia.version>
 
+    <apache.commons.version>2.1.1</apache.commons.version>
+    <jpa.version>1.0.2</jpa.version>
+    <flyway.version>4.0.3</flyway.version>
+    <hibernate.version>5.2.2.Final</hibernate.version>
+    <postgresql.driver.version>9.4.1209.jre7</postgresql.driver.version>
+
     <junit.version>3.8.1</junit.version>
     <mockito.version>1.10.19</mockito.version>
     <powermock.version>1.7.1</powermock.version>
@@ -72,6 +78,38 @@
       <groupId>org.mongodb.morphia</groupId>
       <artifactId>morphia</artifactId>
       <version>${morphia.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
+
+    <!-- PostgreSQL Driver -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>${postgresql.driver.version}</version>
+    </dependency>
+
+    <!-- Apache Commons -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-dbcp2</artifactId>
+      <version>${apache.commons.version}</version>
+    </dependency>
+
+    <!-- Flyway -->
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-core</artifactId>
+      <version>${flyway.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-jpa</artifactId>
+      <version>2.0.2.RELEASE</version>
     </dependency>
 
     <!-- Logging -->

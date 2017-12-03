@@ -3,6 +3,7 @@ package com.book.library.rest;
 import com.book.library.model.Book;
 import com.book.library.services.book.BookService;
 import com.book.library.services.book.BookServiceException;
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +63,7 @@ public class BookController {
      * @return  list of <>BOOKS</>
      * */
     @RequestMapping(value = "/book/{bookId}", method = RequestMethod.GET)
-    public ResponseEntity<Book> getBook(@PathVariable long bookId) {
+    public ResponseEntity<Book> getBook(@PathVariable ObjectId bookId) {
 
         try {
             return new ResponseEntity<>(bookService.getBook(bookId), HttpStatus.OK);
@@ -109,7 +110,7 @@ public class BookController {
      * @return  list of <>BOOKS</>
      * */
     @RequestMapping(value = "/book/{bookId}", method = RequestMethod.DELETE)
-    public ResponseEntity<Book> deleteBook(@PathVariable long bookId) {
+    public ResponseEntity<Book> deleteBook(@PathVariable ObjectId bookId) {
 
         try {
             bookService.deleteBook(bookId);
